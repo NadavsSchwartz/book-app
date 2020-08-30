@@ -1,0 +1,6 @@
+<h2>Reviews</h2>
+<% parent.reviews.in_last_year.each do |r| %>
+<p>Rating: <%= r.rating %></p>
+<p><%= r.content%></p>
+<p>- <%= r.user.username %></p>
+<% end %>

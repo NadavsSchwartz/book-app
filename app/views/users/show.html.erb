@@ -1,2 +1,4 @@
 <%=@user.username %>
 <%=  link_to 'delete', user_path, method:'delete'%>
+<p>This user has written <%= @user.reviews_in_last_year.count %> reviews in the last year.</p>
+<%= render 'shared/review_list', parent: @user %>

@@ -1,24 +1,5 @@
 <p id="notice"><%= notice %></p>
 <h1>This book belongs to <%= @book.user.username %> </h1>
-<p>
-  <strong>Title:</strong>
-  <%= @book.title %>
-</p>
-
-<p>
-  <strong>Author:</strong>
-  <%= @book.author %>
-</p>
-
-<p>
-  <strong>Description:</strong>
-  <%= @book.description %>
-</p>
-
-<%= link_to 'Edit', edit_book_path(@book) %> |
-<%= link_to 'Back', books_path %>
-
-<h2>Reviews</h2>
-<%= @book.reviews.each do |r| %>
-
-<% end %>
+<%= render 'book', book: @book %>
+<%= link_to 'Review this book', new_review_path + "?book=#{@book.id}" %>
+<%= render 'shared/review_list', parent: @book %>

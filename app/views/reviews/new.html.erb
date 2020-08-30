@@ -13,7 +13,9 @@
 
 <div class="field">
   <%= f.label :book_id %>
-  <%= f.select(:book_id, @books.map{|b| [b.title, b.id]}, :prompt => 'Select a book') %>
+  <%= f.select(:book_id, @books.map{|b| [b.title, b.id]},
+  prompt: 'Select a book',
+  selected: @book_id) %>
 </div>
 
 <div class="field">
