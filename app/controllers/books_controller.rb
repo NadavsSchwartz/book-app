@@ -4,7 +4,11 @@ class BooksController < ApplicationController
   # GET /books
   # GET /books.json
   def index
-    @books = Book.all
+    if !params[:author_id]
+      @books = Book.all
+    else
+      @books = Author.find(params[:author_id]).books
+    end
   end
 
   # GET /books/1
@@ -15,6 +19,10 @@ class BooksController < ApplicationController
   # GET /books/new
   def new
     @book = Book.new
+    @authors = Author.all
+    if params[:author_id]
+      @author = Author.find(params[:author_id])
+    end
   end
 
   # GET /books/1/edit
@@ -25,11 +33,15 @@ class BooksController < ApplicationController
   # POST /books.json
   def create
     @book = current_user.books.build(book_params)
-      if @book.save
-        redirect_to @book, notice: 'Book was successfully created.'
-      else
-        render :new
-      end
+    if params[:author_id]
+      @author = Author.find(params[:author_id])
+      @book.author = @author
+    end
+    if @book.save
+      redirect_to @book, notice: 'Book was successfully created.'
+    else
+      render :new
+    end
   end
 
   # PATCH/PUT /books/1
@@ -64,6 +76,6 @@ class BooksController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def book_params
-      params.require(:book).permit(:title, :author, :description)
+      params.require(:book).permit(:title, :author_id, :description)
     end
 end

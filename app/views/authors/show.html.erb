@@ -1,0 +1,11 @@
+<h1><%= @author.name %></h1>
+
+<% if @author.books.empty? %>
+<p>No books for this author yet.</p>
+<% else %>
+<% @author.books.each do |b|%>
+<%= render "books/book", book: b %>
+<% end %>
+<% end %>
+
+<%= link_to  "Add a book to this author", new_author_book_path(@author) %>

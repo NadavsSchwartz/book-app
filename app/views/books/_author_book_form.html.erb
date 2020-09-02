@@ -1,0 +1,17 @@
+<%= form_for([author, book], local: true) do |form| %>
+<%= render 'shared/errors', instance: book %>
+
+<div class="field">
+  <%= form.label :title %>
+  <%= form.text_field :title %>
+</div>
+
+<div class="field">
+  <%= form.label :description %>
+  <%= form.text_field :description %>
+</div>
+
+<div class="actions">
+  <%= form.submit %>
+</div>
+<% end %>

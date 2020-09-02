@@ -7,8 +7,9 @@
 </div>
 
 <div class="field">
-  <%= form.label :author %>
-  <%= form.text_field :author %>
+  <%= form.select :author_id,
+    options_from_collection_for_select(@authors, :id, :name), :prompt => "Select Author"
+    %>
 </div>
 
 <div class="field">
