@@ -1,6 +1,6 @@
 class BooksController < ApplicationController
   before_action :set_book, only: [:show, :edit, :update, :destroy]
-
+  skip_before_action :redirect_if_logged_out, only: [:index]
   # GET /books
   # GET /books.json
   def index
@@ -35,6 +35,7 @@ class BooksController < ApplicationController
   # PATCH/PUT /books/1
   # PATCH/PUT /books/1.json
   def update
+    redirect_if_wrong_user
     respond_to do |format|
       if @book.update(book_params)
         format.html { redirect_to @book, notice: 'Book was successfully updated.' }
@@ -61,7 +62,9 @@ class BooksController < ApplicationController
     def set_book
       @book = Book.find(params[:id])
     end
+    def redirect_if_wrong_user
 
+    end
     # Only allow a list of trusted parameters through.
     def book_params
       params.require(:book).permit(:title, :author, :description)

@@ -1,7 +1,10 @@
 Rails.application.routes.draw do
-  resources :users
-
+  root to: 'static#index'
+  get '/signin', to: 'sessions#new', as: 'signin'
   post '/signin', to: 'sessions#create'
+  delete '/signout', to: 'sessions#destroy'
+  get '/signup', to: 'users#new'
+  resources :users, except: [:new]
 
   resources :books do
     resources :reviews, shallow: true
