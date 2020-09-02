@@ -1,5 +1,11 @@
 <p id="notice"><%= notice %></p>
 <h1>This book belongs to <%= @book.user.username %> </h1>
 <%= render 'book', book: @book %>
-<%= link_to 'Review this book', new_review_path + "?book=#{@book.id}" %>
-<%= render 'shared/review_list', parent: @book %>
+<%= link_to 'Review this book', new_book_review_path(@book) %>
+<h2>Last 3 Reviews</h2>
+<% @book.reviews.slice(0,3).each do |r| %>
+<p>Rating: <%= r.rating %></p>
+<p><%= r.content%></p>
+<p>- <%= r.user.username %></p>
+<% end %>
+<%= link_to 'See All Reviews for this Book', book_reviews_path(@book) %>
