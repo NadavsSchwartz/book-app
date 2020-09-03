@@ -4,6 +4,8 @@ Rails.application.routes.draw do
   post '/signin', to: 'sessions#create'
   delete '/signout', to: 'sessions#destroy'
   get '/signup', to: 'users#new'
+
+  get 'auth/google_oauth2/callback', to: 'sessions#google'
   resources :users, except: [:new]
 
   resources :books do

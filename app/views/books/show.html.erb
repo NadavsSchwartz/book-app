@@ -3,7 +3,7 @@
 <%= render 'book', book: @book %>
 <%= link_to 'Review this book', new_book_review_path(@book) %>
 <h2>Last 3 Reviews</h2>
-<% @book.reviews.slice(0,3).each do |r| %>
+<% @book.reviews.last_3.each do |r| %>
 <p>Rating: <%= r.rating %></p>
 <p><%= r.content%></p>
 <p>- <%= r.user.username %></p>
